@@ -32,4 +32,4 @@ gem "haml"
 gem "haml-rails"
 gem 'omniauth'
 gem 'rdiscount'
-gem 'sprockets', :git => 'git://github.com/sstephenson/sprockets.git'
+gem 'rake', '0.8.7'

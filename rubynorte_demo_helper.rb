@@ -24,9 +24,9 @@ commands =
   "=== Editing the Gemfile ===",
   "g Gemfile",
   "gem 'ruby-prof', :git => 'git://github.com/wycats/ruby-prof.git'\n\
+gem 'rails', :git => 'git://github.com/rails/rails.git'\n\
 gem 'rack', :git => 'git://github.com/rack/rack.git'\n\
 gem 'arel', :git => 'git://github.com/rails/arel.git'\n\
-gem 'rails', :git => 'git://github.com/rails/rails.git'\n\
 gem 'sprockets', :git => 'git://github.com/sstephenson/sprockets.git'",
   "bundle install",
 
@@ -40,24 +40,25 @@ gem 'sprockets', :git => 'git://github.com/sstephenson/sprockets.git'",
 
   "=== Now for a more complex test ===",
   "script/rails generate performance_test submission",
-  "post '/talks', :talk => { :person => 'RubyNorte', :title => 'Teste', :summary => 'Teste de desempenho' }",
-  "rails test:benchmark",
+  "g test/performance/submission_test.rb # change test_homepage to test_submission",
+  "post '/talks', :talk => { :person => 'RubyNorte', :title => 'Test', :summary => 'Performance test' }",
+  "rake test:benchmark",
 
   "=== Both very lightweight. Let's add garbage ===",
-  "g app/controllers/talks_controller.rb",
-  "300000.times { a = Hash.new }",
-  "rails test:benchmark",
+  "g app/controllers/content_controller.rb",
+  "500000.times { a = Hash.new }",
+  "rake test:benchmark",
 
   "=== All results are stored ===",
   "ls tmp/performance",
-  "g tmp/performance/HomepageTestTest#test_homepage_objects.csv",
+  "g tmp/performance/HomepageTest#test_homepage_objects.csv",
   "# just an overview",
   "rm tmp/performance/*",
 
   "=== Let's try profiling ===",
   "rake test:profile",
   "ls tmp/performance",
-  "google-chrome tmp/performance/SubmissionTest#test_submission_wall_time_graph.html tmp/performance/SubmissionTest#test_submission_wall_time_stack.html",
+  "google-chrome file:///home/goncalossilva/Projects/Development/rubynorte/tmp/performance/SubmissionTest%23test_homepage_process_time_graph.html file:///home/goncalossilva/Projects/Development/rubynorte/tmp/performance/SubmissionTest%23test_homepage_process_time_stack.html",
 
   "=== Let's look at Rails' utilities ===",
   "script/rails benchmarker --help",
@@ -69,7 +70,8 @@ gem 'sprockets', :git => 'git://github.com/sstephenson/sprockets.git'",
   "g Gemfile # comment ruby-prof",
   "# just comment ruby-prof",
   "bundle install",
-  "script/rails benchmarker 'Talk.all' 'Admission.all' --runs 1"]
+  "script/rails benchmarker 'Talk.all' 'Admission.all' --runs 1",
+  "=== Thanks! Bye! ==="]
 
 enumerator = commands.to_enum
 loop do
@@ -80,12 +82,15 @@ loop do
   end
   
   if cmd =~ /^===/
-    puts "# #{cmd.underline}"
+    print "# #{cmd.underline}"
   else
-    puts "$ #{cmd}"
-    execute cmd
+    print "$ #{cmd}"
+    copy_to_clipboard cmd
     if cmd =~ /^g /
       copy_to_clipboard enumerator.next
+    end
+    if cmd =~ /^g |google-chrome/
+      execute cmd
     end
   end
   
