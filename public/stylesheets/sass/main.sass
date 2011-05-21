@@ -61,7 +61,7 @@ footer
   border-top: 1px solid #ddd
   text-align: center
 
-input[type='submit']
+input[type='submit'], .button
   background: #953539
   background-image: -webkit-gradient(linear,left top, left bottom,from(rgba(255,255,255,.1)),to(rgba(0,0,0,.1)))
   border: 0
@@ -106,6 +106,15 @@ input[type='submit']
   &.alert
     color: #933
     background-color: #fee
+
+.tip
+  font-size: 0.8em
+  background: #ffffdd
+  padding: 1em
+
+#confirm_button
+  font-size: 1.5em
+  margin: 1em 0
 
 // ID's
 
@@ -161,18 +170,37 @@ input[type='submit']
 
 ul#admissions
   list-style: none
+  overflow: hidden
   li
     float: left
+  .confirmed
+    img
+      background-color: #393
   img
     vertical-align: top
     margin:
-      right: 10px
-      bottom: 10px
+      right: 14px
+      bottom: 14px
     padding: 5px
     background: #eee
     -webkit-box-shadow: rgba(0,0,0,.2) 0 3px 3px
     &:hover
       background: #8f4444
+
+#confirm-admission
+  background: rgba(50, 255, 0, .2)
+  margin: 2em 0
+  padding: 2em
+  font-size: 1
+  text-align: center
+  border-radius: 3px
+  input
+    background-color: #583
+    font-size: 1.5em
+  p
+    font: 3em League Gothic
+    text-transform: uppercase
+    color: #583
 
 @media screen and (max-width: 480px)
   #bucket, header > div

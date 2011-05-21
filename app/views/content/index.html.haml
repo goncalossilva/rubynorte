@@ -7,6 +7,13 @@
   %br
   =link_to "inscreve-te!", '/auth/twitter'
 
+-if session[:user] && !session[:user][:confirmed]
+  #confirm-admission
+    %p Confirmas que apareces no Rubynorte no dia 21?
+    -form_for @user do |f|
+      =f.hidden_field :confirmed, :value => 1
+      =f.submit 'Confirmo!'
+
 #about
   :markdown
     O que é o Rubynorte?
@@ -19,12 +26,20 @@
     O próximo evento será no dia *21 de Maio de 2011* às 9h30 em
     Vila Nova de Gaia, no #{link_to "Afurada Valley", map_path, :rel => 'fancybox'}.
     
-    ## Já estão inscritas #{pluralize @admissions.count, "pessoa"}.
-  
+  %h2
+    Já estão inscritas
+    ="#{pluralize @admissions.count, "pessoa"},"
+    =@confirmed_count
+    confirmadas.
+
   %ul#admissions
     -@admissions.each do |admission|
-      %li
+      %li{:class => admission.confirmed ? 'confirmed' : '' }
         =link_to image_tag(admission.image_url, :width => '40'),"http://twitter.com/#{admission.screen_name}",:title => admission.name
+
+  %p.tip De modo a podermos preparar os pormenores do evento, pedimo-vos que confirmem a vossa presença através do botão abaixo. Oferecemo-vos uma auréola verde no vosso avatar em troca :)
+  %p#confirm_button
+    =link_to raw("Quero confirmar a minha inscrição &#9656;"), '/auth/twitter', :class => 'button'
 
 =form_for @talk, :class => 'speaker' do |f|
   %img(width='180' height='135')

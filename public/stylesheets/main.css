@@ -58,7 +58,7 @@ footer {
   border-top: 1px solid #dddddd;
   text-align: center; }
 
-input[type='submit'] {
+input[type='submit'], .button {
   background: #953539;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.1)), to(rgba(0, 0, 0, 0.1)));
   border: 0;
@@ -76,7 +76,7 @@ input[type='submit'] {
   float: left; }
   .speaker img, #new_talk img {
     float: left;
-    margin: 0 29px 29px 0;
+    margin: 0 28px 30px 0;
     border: 1px solid #dddddd;
     -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px;
     -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px;
@@ -101,6 +101,15 @@ input[type='submit'] {
   .flash.alert {
     color: #993333;
     background-color: #ffeeee; }
+
+.tip {
+  font-size: 0.8em;
+  background: #ffffdd;
+  padding: 1em; }
+
+#confirm_button {
+  font-size: 1.5em;
+  margin: 1em 0; }
 
 #bucket, header > div {
   width: 960px;
@@ -151,18 +160,36 @@ input[type='submit'] {
     margin-bottom: 1em; }
 
 ul#admissions {
-  list-style: none; }
+  list-style: none;
+  overflow: hidden; }
   ul#admissions li {
     float: left; }
+  ul#admissions .confirmed img {
+    background-color: #339933; }
   ul#admissions img {
     vertical-align: top;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-right: 14px;
+    margin-bottom: 14px;
     padding: 5px;
     background: #eeeeee;
     -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 3px 3px; }
     ul#admissions img:hover {
       background: #8f4444; }
+
+#confirm-admission {
+  background: rgba(50, 255, 0, 0.2);
+  margin: 2em 0;
+  padding: 2em;
+  font-size: 1;
+  text-align: center;
+  border-radius: 3px; }
+  #confirm-admission input {
+    background-color: #558833;
+    font-size: 1.5em; }
+  #confirm-admission p {
+    font: 3em League Gothic;
+    text-transform: uppercase;
+    color: #558833; }
 
 @media screen and (max-width: 480px) {
   #bucket, header > div {
